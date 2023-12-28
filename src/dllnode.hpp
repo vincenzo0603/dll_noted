@@ -388,9 +388,14 @@ private:
 		
 		// Get position information from pose
 		tf::Vector3 t = initPose.getOrigin();
+		// TODO: 在上面if...else 语句中已经获得yaw了，现在怎么从initPose中获得yaw呢
+		// 我的理解在if和else中主要目的是获取roll，pitch，顺带获取yaw；关于yaw更信任init中的，不过感觉if中没必要求yaw了
 		yaw = getYawFromTf(initPose);
 		
 		// Update global TF
+
+
+		
 		tf::Quaternion q;
 		q.setRPY(roll, pitch, yaw);
 		m_lastGlobalTf = tf::Transform(q, tf::Vector3(t.x(), t.y(), t.z()+m_initZOffset))*m_lastOdomTf.inverse();
